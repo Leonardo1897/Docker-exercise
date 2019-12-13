@@ -1,0 +1,8 @@
+FROM csighub.tencentyun.com/sandylian/centos7-jdk8:v1.0
+MAINTAINER sandyian@tencent.com
+WORKDIR .
+ADD china.asc apac.asc /tmp/
+RUN cat /tmp/china.asc /tmp/apac.asc | gpg --batch --import \
+    && echo 'Asia/Shanghai' >/etc/timezone \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+CMD ["bash"]
